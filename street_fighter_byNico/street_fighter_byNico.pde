@@ -17,6 +17,7 @@ int Moviment_Ryu;
 int Reloj_Ryu;
 
 
+
 void setup() {
   size(600, 250);
   fons=loadImage("fons.gif");
@@ -69,7 +70,7 @@ void dibuixaBarres() {
   rect(DXrect, DYrect, Dancho_de_barra, 24);
 }
 void dibujar_Ryu() {
-  if(Reloj_Ryu>50){
+  if(Reloj_Ryu>10){
    Ryu=RyuGuardia; 
   }
   image(Ryu, Moviment_Ryu, 200-Ryu.height);
