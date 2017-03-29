@@ -1,7 +1,15 @@
 PImage fons;
 PImage RyuGuardia;
 PImage RyuPuno;
+PImage RyuPatada;
+PImage RyuBloqueo;
 PImage Ryu;
+PImage KenGuardia;
+PImage KenPuno;
+PImage KenPatada;
+PImage KenBloqueo;
+PImage Ken;
+
 int IXrect;
 int IYrect;
 float IanchoBarra, IanchoBarraTotal;
@@ -13,9 +21,10 @@ int DXrect;
 int DYrect;
 float Dancho_de_barra=250;
 float Dancho_de_barra_total;
-int Moviment_Ryu;
+int Posicio_Ryu;
 int Reloj_Ryu;
-
+int Posicio_Ken;
+int Reloj_Ken;
 
 
 void setup() {
@@ -23,7 +32,14 @@ void setup() {
   fons=loadImage("fons.gif");
   RyuGuardia=loadImage("RyuGuardia.png");
   RyuPuno=loadImage("RyuPuño.png");
+  RyuBloqueo=loadImage("RyuBloqueo.png");
   Ryu=RyuGuardia;
+  RyuPatada=loadImage("RyuPatada.png");
+  KenGuardia=loadImage("KenGuardia.png");
+  KenPuno=loadImage("KenPuño.png");
+  KenBloqueo=loadImage("KenBloqueo.png");
+  Ken=KenGuardia;
+  KenPatada=loadImage("KenPatada.png");
   IXrect=15;
   IYrect=5;
   IanchoBarraTotal=250;
@@ -35,8 +51,10 @@ void setup() {
   DYrect=5;
   DXrect=width/2;
   Dancho_de_barra=250;
-  Moviment_Ryu=50;
+  Posicio_Ryu=50;
   Reloj_Ryu=0;
+   Posicio_Ken=500;
+  Reloj_Ken=0;
 }
 
 
@@ -44,8 +62,10 @@ void setup() {
 void draw() {
   image(fons, 0, 0);
   dibujar_Ryu();
+   dibujar_Ken();
   dibuixaBarres();
   Reloj_Ryu++;
+  Reloj_Ken++;
 }
 
 void dibuixaBarres() {
@@ -71,19 +91,57 @@ void dibuixaBarres() {
 }
 void dibujar_Ryu() {
   if(Reloj_Ryu>10){
+    
    Ryu=RyuGuardia; 
   }
-  image(Ryu, Moviment_Ryu, 200-Ryu.height);
+  image(Ryu, Posicio_Ryu, 200-Ryu.height);
+}
+void dibujar_Ken() {
+  if(Reloj_Ken>10){
+    
+   Ken=KenGuardia; 
+  }
+  image(Ken, Posicio_Ken, 200-Ken.height);
 }
 void keyPressed() {
   if (key=='A'||key=='a') {
-    Moviment_Ryu=Moviment_Ryu-5;
+    Posicio_Ryu=Posicio_Ryu-5;
   }
   if (key=='D'||key=='d') {
-    Moviment_Ryu=Moviment_Ryu+5;
+    Posicio_Ryu=Posicio_Ryu+5;
   }
   if (key=='Q'||key=='q') {
     Ryu=RyuPuno;
     Reloj_Ryu=0;
+  }
+    if (key=='E'||key=='e') {
+    Ryu=RyuPatada;
+    Reloj_Ryu=0;
+
+  }
+   if (key=='W'||key=='w') {
+    Ryu=RyuBloqueo;
+    Reloj_Ryu=0;
+
+  }
+   if (key=='J'||key=='j') {
+    Posicio_Ken=Posicio_Ken-5;
+  }
+  if (key=='L'||key=='l') {
+    Posicio_Ken=Posicio_Ken+5;
+  }
+  if (key=='U'||key=='u') {
+    Ken=KenPuno;
+    Reloj_Ken=0;
+  }
+    if (key=='O'||key=='o') {
+    Ken=KenPatada;
+    Reloj_Ken=0;
+
+  }
+   if (key=='i'||key=='I') {
+    Ken=KenBloqueo;
+    Reloj_Ken=0;
+
   }
 }
