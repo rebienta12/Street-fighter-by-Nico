@@ -39,21 +39,21 @@ void setup() {
   KenPuno=loadImage("KenPuño.png");
   KenBloqueo=loadImage("KenBloqueo.png");
   Ken=KenGuardia;
-  KenPatada=loadImage("KenPatada.png");
+  KenPatada=loadImage("kenPatada.png");
   IXrect=15;
   IYrect=5;
   IanchoBarraTotal=250;
   Ivida_total=250;
-  Ivida_que_le_queda=100;
+  Ivida_que_le_queda=Ivida_total;
   Dvida_total=250;
-  Dvida_que_le_queda=150;
+  Dvida_que_le_queda=Dvida_total;
   Dancho_de_barra_total=250;
   DYrect=5;
   DXrect=width/2;
   Dancho_de_barra=250;
   Posicio_Ryu=50;
   Reloj_Ryu=0;
-   Posicio_Ken=500;
+  Posicio_Ken=500;
   Reloj_Ken=0;
 }
 
@@ -62,7 +62,7 @@ void setup() {
 void draw() {
   image(fons, 0, 0);
   dibujar_Ryu();
-   dibujar_Ken();
+  dibujar_Ken();
   dibuixaBarres();
   Reloj_Ryu++;
   Reloj_Ken++;
@@ -90,16 +90,16 @@ void dibuixaBarres() {
   rect(DXrect, DYrect, Dancho_de_barra, 24);
 }
 void dibujar_Ryu() {
-  if(Reloj_Ryu>10){
-    
-   Ryu=RyuGuardia; 
+  if (Reloj_Ryu>10) {
+
+    Ryu=RyuGuardia;
   }
   image(Ryu, Posicio_Ryu, 200-Ryu.height);
 }
 void dibujar_Ken() {
-  if(Reloj_Ken>10){
-    
-   Ken=KenGuardia; 
+  if (Reloj_Ken>10) {
+
+    Ken=KenGuardia;
   }
   image(Ken, Posicio_Ken, 200-Ken.height);
 }
@@ -113,18 +113,33 @@ void keyPressed() {
   if (key=='Q'||key=='q') {
     Ryu=RyuPuno;
     Reloj_Ryu=0;
+    if (Posicio_Ryu+Ryu.width>=Posicio_Ken&&Posicio_Ryu+Ryu.width<=Posicio_Ken+Ken.width) {
+      println("hit");
+      Dvida_que_le_queda-=10;
+      if(Dvida_que_le_queda<=0){
+        Dvida_que_le_queda=0;
+      }   
+    }
   }
-    if (key=='E'||key=='e') {
+
+  if (key=='E'||key=='e') {
     Ryu=RyuPatada;
     Reloj_Ryu=0;
-
+     if (Posicio_Ryu+Ryu.width>=Posicio_Ken&&Posicio_Ryu+Ryu.width<=Posicio_Ken+Ken.width) {
+      println("hit");
+      Dvida_que_le_queda-=15;
+      if(Dvida_que_le_queda<=0){
+        Dvida_que_le_queda=0;
+      }
+      }
   }
-   if (key=='W'||key=='w') {
+  if (key=='W'||key=='w') {
     Ryu=RyuBloqueo;
     Reloj_Ryu=0;
-
+   
+      
   }
-   if (key=='J'||key=='j') {
+  if (key=='J'||key=='j') {
     Posicio_Ken=Posicio_Ken-5;
   }
   if (key=='L'||key=='l') {
@@ -133,15 +148,27 @@ void keyPressed() {
   if (key=='U'||key=='u') {
     Ken=KenPuno;
     Reloj_Ken=0;
+    if (Posicio_Ken>=Posicio_Ryu&&Posicio_Ken<=Posicio_Ryu+Ryu.width) {
+      println("hitD");
+      Ivida_que_le_queda-=15;
+      if(Ivida_que_le_queda<=0){
+        Ivida_que_le_queda=0;
+      }
+      }
   }
-    if (key=='O'||key=='o') {
+  if (key=='O'||key=='o') {
     Ken=KenPatada;
     Reloj_Ken=0;
-
+    if (Posicio_Ken>=Posicio_Ryu&&Posicio_Ken<=Posicio_Ryu+Ryu.width) {
+      println("hitD");
+      Ivida_que_le_queda-=10;
+      if(Ivida_que_le_queda<=0){
+        Ivida_que_le_queda=0;
+      }
+      }
   }
-   if (key=='i'||key=='I') {
+  if (key=='i'||key=='I') {
     Ken=KenBloqueo;
     Reloj_Ken=0;
-
   }
 }
